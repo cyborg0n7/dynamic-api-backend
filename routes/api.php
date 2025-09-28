@@ -26,6 +26,9 @@ Route::get('/ping', function () {
     return response()->json(['message' => 'pong']);
 });
 
+// Orchestration Routes
+Route::get('/orchestrate/{id}/status', [OrchestrationController::class, 'status'])->name('orchestration.status');
+Route::delete('/orchestrate/{id}/cancel', [OrchestrationController::class, 'cancel'])->name('orchestration.cancel');
 Route::post('/orchestrate', [OrchestrationController::class, 'run']);
 
 // User registration

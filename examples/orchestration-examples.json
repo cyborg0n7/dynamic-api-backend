@@ -1,0 +1,115 @@
+{
+  "sync_orchestration": {
+    "user": "john_doe",
+    "mode": "sync",
+    "apis": [
+      {
+        "url": "https://jsonplaceholder.typicode.com/users/1",
+        "method": "GET"
+      },
+      {
+        "url": "https://jsonplaceholder.typicode.com/posts",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "title": "New Post",
+          "body": "This is a new post",
+          "userId": 1
+        }
+      }
+    ]
+  },
+  "async_orchestration": {
+    "user": "jane_doe",
+    "mode": "async",
+    "options": {
+      "priority": "high",
+      "stop_on_failure": true,
+      "delay": 10
+    },
+    "apis": [
+      {
+        "url": "https://jsonplaceholder.typicode.com/users/1",
+        "method": "GET"
+      },
+      {
+        "url": "https://jsonplaceholder.typicode.com/posts",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "title": "Async Post",
+          "body": "This is an async post",
+          "userId": 1
+        }
+      }
+    ]
+  },
+  "conditional_orchestration": {
+    "user": "developer",
+    "mode": "async",
+    "apis": [
+      {
+        "url": "https://jsonplaceholder.typicode.com/users/1",
+        "method": "GET"
+      },
+      {
+        "url": "https://jsonplaceholder.typicode.com/posts",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "title": "Conditional Post",
+          "body": "This only runs if user fetch succeeds",
+          "userId": 1
+        },
+        "conditions": [
+          {
+            "type": "success",
+            "api_index": 0
+          }
+        ]
+      }
+    ]
+  },
+  "transformation_orchestration": {
+    "user": "developer",
+    "mode": "async",
+    "apis": [
+      {
+        "url": "https://jsonplaceholder.typicode.com/users/1",
+        "method": "GET",
+        "response_transformations": [
+          {
+            "type": "extract_field",
+            "field_path": "name",
+            "alias": "user_name"
+          }
+        ]
+      },
+      {
+        "url": "https://jsonplaceholder.typicode.com/posts",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "title": "Post by {{0.name}}",
+          "body": "This post is created by the user from the first API",
+          "userId": 1
+        },
+        "request_transformations": [
+          {
+            "type": "modify_body",
+            "key": "title",
+            "value": "Post by {{0.name}}"
+          }
+        ]
+      }
+    ]
+  }
+}

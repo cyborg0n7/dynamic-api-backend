@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  orchestration-worker:
+    build:
+      context: .
+      dockerfile: docker/worker.Dockerfile
+    container_name: orchestration_worker
+    restart: unless-stopped
+    environment:
+      - APP_ENV=production
+      - QUEUE_CONNECTION=rabbitmq
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=guest
+      - RABBITMQ_PASSWORD=guest
+      - RABBITMQ_VHOST=/
+      - RABBITMQ_QUEUE=orchestration
+    depends_on:
+      - rabbitmq
+      - mysql
+      - redis
+    volumes:
+      - ./storage/logs:/var/www/storage/logs
+    networks:
+      - api-network
+
+  rabbitmq:
+    image: rabbitmq:3.12-management
+    container_name: rabbitmq
+    restart: unless-stopped
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - api-network
+
+networks:
+  api-network:
+    driver: bridge
+
+volumes:
+  rabbitmq_data:
