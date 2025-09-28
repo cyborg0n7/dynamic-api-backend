@@ -1,61 +1,111 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Dynamic API Backend
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Laravel-based API Gateway backend for **dynamic routing**, **orchestration**, and **secure API management**.
+This project allows developers to define APIs dynamically, control access via API keys and JWT authentication, and orchestrate multiple API calls in sequence.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+* **Dynamic API Routing** — Define APIs and route requests dynamically without hardcoding.
+* **API Orchestration** — Execute multiple APIs in sequence with structured results.
+* **JWT Authentication** — Secure user registration and login with token issuance.
+* **API Key Authentication** — Middleware for API key access control.
+* **Role-Based Access Control** — Restrict API access by user roles.
+* **Transformation Rules** — Customize request/response transformations per API.
+* **CRUD Operations** — Manage Users, APIs, Orchestration Rules, Request Logs, and Billing Records.
+* **Extensible Architecture** — Designed for scalability and easy extension.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 📦 Tech Stack
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+* **Backend Framework:** Laravel
+* **Authentication:** JWT (JSON Web Tokens)
+* **Database:** MySQL / MariaDB
+* **Language:** PHP
+* **Version Control:** Git + GitHub
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🛠 Setup
 
-## Laravel Sponsors
+1. **Clone the repository**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/dynamic-api-backend.git
+   cd dynamic-api-backend
+   ```
 
-### Premium Partners
+2. **Install dependencies**
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+   ```bash
+   composer install
+   ```
 
-## Contributing
+3. **Setup environment variables**
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+   ```bash
+   cp .env.example .env
+   ```
 
-## Code of Conduct
+   Then configure your `.env` file with database credentials and JWT settings.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+4. **Run migrations**
 
-## Security Vulnerabilities
+   ```bash
+   php artisan migrate
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+5. **Serve the application**
 
-## License
+   ```bash
+   php artisan serve
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## 📂 Project Structure
+
+* `app/Http/Controllers` — API controllers and orchestration logic
+* `app/Models` — Laravel models for Users, APIs, API Keys, Orchestration Rules, Request Logs
+* `routes/api.php` — API routing definitions
+* `database/migrations` — Database table definitions
+* `config/jwt.php` — JWT authentication configuration
+
+---
+
+## 📝 Progress Log
+
+**Day 1:**
+
+* Created models, controllers, routes for Users, APIs, Orchestration Rules, Request Logs, Billing Records.
+* Fixed model–controller mismatches.
+* Tested CRUD for Request Logs.
+* Configured DB environment variables.
+* Attempted Redis setup (rolled back).
+* Discussed RabbitMQ integration.
+
+**Day 2:**
+
+* Implemented JWT user registration/login APIs.
+* Created middleware for API key authentication and role-based access control.
+* Secured API keys with hashing/encryption.
+* Added validations for API definitions.
+* Stored authentication type and transformation rules.
+* Created endpoint to retrieve API definitions.
+* Added test API definition and confirmed dynamic routing works via `/api/test`.
+* Implemented orchestration with `OrchestrationController` and POST `/api/orchestrate`.
+
+---
+
+## 📜 License
+
+MIT License — see [LICENSE](LICENSE) for details.
+
+---
+
+## 📫 Contact
+
+Created by **Eli El Bakkali**.
+Feel free to open issues or submit pull requests.
